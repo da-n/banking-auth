@@ -15,7 +15,7 @@ import (
 )
 
 func Start() {
-	sanityCheck()
+	envCheck()
 	router := mux.NewRouter()
 	authRepository := domain.NewAuthRepository(getDbClient())
 	ah := AuthHandler{service.NewLoginService(authRepository, domain.GetRolePermissions())}
@@ -49,7 +49,7 @@ func getDbClient() *sqlx.DB {
 	return client
 }
 
-func sanityCheck() {
+func envCheck() {
 	envProps := []string{
 		"SERVER_ADDRESS",
 		"SERVER_PORT",
